@@ -52,29 +52,17 @@ namespace Problem1
 
                 foreach (Entry entry in root.Entries)
                 {
-                    //Debug.WriteLine("API: " + entry.API);
-                    //Debug.WriteLine("Description: " + entry.Description);
-                    //Debug.WriteLine("Auth: " + entry.Auth);
-                    //Debug.WriteLine("HTTPS: " + entry.HTTPS);
-                   // Debug.WriteLine("Cors: " + entry.Cors);
-                    //Debug.WriteLine("Link: " + entry.Link);
-                    //Debug.WriteLine("Category: " + entry.Category);
-                    //Debug.WriteLine("");
-
                     string connectionString = @"Data Source = SEIF; Initial Catalog = Problem1; Integrated Security = True; ";
                     using (SqlConnection connection = new SqlConnection(connectionString))
                     {
-                        // Open the connection
+                       
                         connection.Open();
 
-                        // Create the insert statement
                         string insertStatement = "INSERT INTO JSON_DATA(API, [Description], Auth, HTTPS, Cors, Link, Category) " +
                             "VALUES('" + entry.API.Replace("'", "''") + "', '" + entry.Description.Replace("'", "''") + "', '" + entry.Auth + "', '" + entry.HTTPS + "', '" + entry.Cors + "', '" + entry.Link + "', '" + entry.Category + "')";
 
-                        // Create a SqlCommand object with the insert statement and the SqlConnection object
                         SqlCommand command = new SqlCommand(insertStatement, connection);
 
-                        // Execute the insert statement
                         int rowsAffected = command.ExecuteNonQuery();
                     }
                 }
